@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ cliente.designacao }}</h1>
+    <h4 class="text-muted">ID: {{ cliente.idCliente }}</h4>
+
+    <div class="table-responsive mt-5">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Objeto</th>
+                    <th>Data de Publicação</th>
+                    <th>Data de Celebração</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in contratos %}
+                <tr>
+                    <td class="text-center">
+                        <a href="/contratos/{{ c.idContrato }}/" class="text-decoration-none">{{ c.idContrato }}</a>
+                    </td>
+                    <td>{{ c.objetoContrato }}</td>
+                    <td class="text-center">{{ c.dataPublicacao }}</td>
+                    <td class="text-center">{{ c.dataCelebracao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

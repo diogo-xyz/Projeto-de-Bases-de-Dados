@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <div>
+            <h1>Número de contratos realizados por mês, na Península Ibérica</h1> 
+            <p class="text-muted">
+                *Indique o nome do país (País) e a quantidade de contratos para cada mês (Janeiro,Fevereiro).
+            </p>
+        </div>
+        <button id="solution-button" class="btn btn-secondary">Mostrar Solução</button>
+    </div>
+
+    <div id="solution-query" class="p-3 border rounded bg-light" style="display: none;">
+        <pre class="mb-0">
+SELECT 
+p.nome AS País,
+COUNT(DISTINCT CASE WHEN strftime('%m', c.dataPublicacao) = '01' THEN c.idContrato ELSE NULL END) AS Janeiro,
+COUNT(DISTINCT CASE WHEN strftime('%m', c.dataPublicacao) = '02' THEN c.idContrato ELSE NULL END) AS Fevereiro
+FROM Contrato c
+JOIN Local l ON c.idContrato = l.idContrato
+JOIN Municipio m ON l.idMun = m.idMun
+JOIN Distrito d ON m.idDist = d.idDist
+JOIN Pais p ON p.idPais = d.idPais
+WHERE p.nome IN ('Portugal', 'Espanha')
+GROUP BY p.nome;
+        </pre>
+    </div>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>País</th>
+                    <th>Janeiro</th>
+                    <th>Fevereiro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in resposta %}
+                <tr>
+                    <td>{{ r.País }}</td>
+                    <td>{{ r.Janeiro }}</td>
+                    <td>{{ r.Fevereiro }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const button = document.getElementById('solution-button');
+    const solutionDiv = document.getElementById('solution-query');
+
+    button.addEventListener('click', function () {
+        if (solutionDiv.style.display === 'none' || solutionDiv.style.display === '') {
+            solutionDiv.style.display = 'block';
+            button.textContent = 'Esconder Solução'; 
+        } else {
+            solutionDiv.style.display = 'none';
+            button.textContent = 'Mostrar Solução';
+        }
+    });
+});
+</script>
+
+<style>
+    pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+</style>
+
+{% endblock %}
