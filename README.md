@@ -51,4 +51,3 @@ Uma aplicação **Flask** foi desenvolvida para consultar e visualizar os dados.
 ## Como Executar
    - cd app
    - python server.py
-   - http://127.0.0.1:5000/
