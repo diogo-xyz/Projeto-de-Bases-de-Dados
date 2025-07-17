@@ -22,7 +22,7 @@ Este projeto foi desenvolvido no âmbito da unidade curricular de Bases de Dados
 
 ---
 
-## 🌐 Aplicação Web
+## Aplicação Web
 
 Uma aplicação **Flask** foi desenvolvida para consultar e visualizar os dados. Endpoints disponíveis:
 
