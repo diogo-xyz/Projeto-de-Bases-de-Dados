@@ -28,10 +28,10 @@ Uma aplicação **Flask** foi desenvolvida para consultar e visualizar os dados.
 
 - `/` — Página inicial
 - `/contratos/` — Lista de contratos
-- `/vendedores/`, `/clientes/`, `/pais/` — Listagens de entidades
+- `/vendedores/`, `/clientes/`, `/pais/` — Lista de entidades
 - `/pais/<id>/` — Lista distritos do país
 - `/pais/distritos/<id>/` — Lista municípios do distrito
-- `/perguntas/<n>/` — Consulta SQL n (1 a 16)
+- `/perguntas/<n>/` — Perguntas SQL n (1 a 16)
 
 --- 
 
@@ -49,8 +49,6 @@ Uma aplicação **Flask** foi desenvolvida para consultar e visualizar os dados.
 ---
 
 ## Como Executar
-cd app
-
-python server.py
-
-http://127.0.0.1:5000/
+   - cd app
+   - python server.py
+   - http://127.0.0.1:5000/
